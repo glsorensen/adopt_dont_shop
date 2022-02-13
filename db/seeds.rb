@@ -9,9 +9,9 @@ PetApplication.destroy_all
 Application.destroy_all
 Pet.destroy_all
 Shelter.destroy_all
-application_1 = Application.create!(name: "Gunnar Sorensen", street_address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068")
-application_2 = Application.create!(name: "Priska Sorensen", street_address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog mom!", status: "Pending")
-application_3 = Application.create!(name: "Lynn Sorensen", street_address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog dad!", status: "Pending")
+application_1 = Application.create!(name: "Gunnar Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog Dad!", status: "in progress")
+application_2 = Application.create!(name: "Priska Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog mom!", status: "in progress")
+application_3 = Application.create!(name: "Lynn Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog mom!", status: "in progress")
 
 shelter_1 = Shelter.create(name: 'Red Lodge Shelter', city: 'Red Lodge, MT', foster_program: false, rank: 9)
 shelter_2 = Shelter.create(name: 'Help for Homeless Pets', city: 'Red Lodge, MT', foster_program: true, rank: 10)
