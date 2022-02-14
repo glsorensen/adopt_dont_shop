@@ -1,0 +1,28 @@
+<header>
+<h1>New Application</h1>
+</header>
+
+<body>
+  <section id="application-form">
+  <%= form_with url: '/applications', method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+<br>
+  <%= form.label :address %>
+  <%= form.text_field :address %>
+<br>
+  <%= form.label :city %>
+  <%= form.text_field :city %>
+<br>
+  <%= form.label :state %>
+  <%= form.text_field :state %>
+<br>
+  <%= form.label :zipcode %>
+  <%= form.text_field :zipcode %>
+<br>
+  <%= form.submit %>
+<%end%>
+</section>
+</body>
+
+Security
