@@ -10,9 +10,21 @@
 <p>City: <%=@applicant.city%></p>
 <p>State: <%=@applicant.state%></p>
 <p>Zip Code: <%=@applicant.zipcode%></p>
-
-<h4>What makes <%=@applicant.name %> a good fit?</h4>
-<p><%=@applicant.description%></p>
-
-<h4>Status:</h4>
-<p><%=@applicant.status%></p>
+<h3>Why they'd make a great home: <%= @applicant.description  %></h3>
+<h3>Status: <%= @applicant.status  %></h3>
+<% if @applicant.pets.count > 0 %>
+   <h3>Interested in adopting:
+   <% @applicant.pets.each do |pet| %>
+      <%= link_to pet.name, "/pets/#{pet.id}" %>
+   <% end %></h3>
+<% end %>
+<%= form_with url: "/applications/#{@applicant.id}", method: :get, local: true do |f| %>
+  <%= f.label :search, "Add a Pet to this Application" %>
+  <%= f.text_field :search %>
+  <%= f.submit "Search" %>
+<% end %>
+<% if @applicant.pet_search(params[:search]).count >= 1 %>
+   <% @applicant.pet_search(params[:search]).each do |pet| %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+   <% end %>
+<% end %>

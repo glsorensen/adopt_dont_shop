@@ -9,6 +9,8 @@ class Application < ApplicationRecord
   validates :zipcode, presence: true
   validates :description, presence: false
 
-
-  enum status: {"in progress": 0, pending: 1, accepted: 2, rejected: 3}
+  def pet_search(pet_name)
+      Pet.where("name = ?", pet_name)
+  end
+  # enum status: {"in progress": 0, pending: 1, accepted: 2, rejected: 3}
 end
