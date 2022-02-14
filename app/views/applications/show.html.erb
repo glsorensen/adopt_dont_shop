@@ -1,30 +1,36 @@
-<h1><%= @applicant.name %>'s Application</h1>
-<% @applicant.pets.each do |pet| %>
+<header>
+  <h1><%= @applicant.name %>'s Application</h1>
+</header>
 
-<h4>Pets Applied For</h4>
-<p><%= pet.name %></p>
-<%end%>
+<h2>Add a Pet to this Application</h2>
+  <section id='search-pet'>
+  <%= form_with url: "/applications/#{@applicant.id}?search=pet_name", method: :get, local: true do |form| %>
+  <%= form.label :pet_name %>
+  <%= form.text_field :pet_name %>
+  <%= form.submit "Search" %>
+  <% end %>
+<h4> Matches: <% @pets.each do |pet| %> <h4>
+  <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
+  <% end %>
+</section>
 
-<h4><%= @applicant.name%>'s Information</h4>
-<p>Street Address: <%=@applicant.address%></p>
-<p>City: <%=@applicant.city%></p>
-<p>State: <%=@applicant.state%></p>
-<p>Zip Code: <%=@applicant.zipcode%></p>
-<h3>Why they'd make a great home: <%= @applicant.description  %></h3>
-<h3>Status: <%= @applicant.status  %></h3>
-<% if @applicant.pets.count > 0 %>
-   <h3>Interested in adopting:
-   <% @applicant.pets.each do |pet| %>
-      <%= link_to pet.name, "/pets/#{pet.id}" %>
-   <% end %></h3>
-<% end %>
-<%= form_with url: "/applications/#{@applicant.id}", method: :get, local: true do |f| %>
-  <%= f.label :search, "Add a Pet to this Application" %>
-  <%= f.text_field :search %>
-  <%= f.submit "Search" %>
-<% end %>
-<% if @applicant.pet_search(params[:search]).count >= 1 %>
-   <% @applicant.pet_search(params[:search]).each do |pet| %>
-      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-   <% end %>
-<% end %>
+<section id="pet-names">
+  <h2>Pets Applied For</h2>
+    <% @applicant.pets.each do |pet| %>
+    <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
+    <%end%>
+</section>
+
+<section id="applicant-info">
+  <h4><%= @applicant.name%>'s Information</h4>
+    <p>Street Address: <%=@applicant.address%></p>
+    <p>City: <%=@applicant.city%></p>
+    <p>State: <%=@applicant.state%></p>
+    <p>Zip Code: <%=@applicant.zipcode%></p>
+
+  <h4>What makes <%=@applicant.name %> a good fit?</h4>
+    <p><%=@applicant.description%></  p>
+
+  <h4>Status:</h4>
+    <p><%=@applicant.status%></p>
+</section>
