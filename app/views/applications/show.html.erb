@@ -10,7 +10,7 @@
   <%= form.submit "Search" %>
   <% end %>
 <h4> Matches: <% @pets.each do |pet| %> <h4>
-  <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
+  <p>Pet: <%=pet.name%> <%= link_to "Adopt Me!", "/applications/#{@applicant.id}?add_pet=#{pet.id}" %></p>
   <% end %>
 </section>
 

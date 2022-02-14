@@ -21,6 +21,9 @@ class ApplicationsController < ApplicationController
 
     if params[:pet_name]
       @pets = Pet.search(params[:pet_name])
+    elsif params[:add_pet]
+      @applicant.pets << Pet.find(params[:add_pet])
+      @pets = @applicant.pets
     else
       @pets =[]
     end
