@@ -17,7 +17,7 @@ RSpec.describe 'as a visitor' do
 
     it 'lists the attributes of an applicant and application' do
 
-     expect(page).to have_content("Applicant: Gunnar Sorensen")
+     expect(page).to have_content("Gunnar Sorensen's Application")
      expect(page).to have_content("Address: 123 Fake Street")
      expect(page).to have_content("City: Red Lodge")
      expect(page).to have_content("State: MT")

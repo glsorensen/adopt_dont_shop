@@ -8,12 +8,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.new({
-                    name: params[:name],
-                    address: params[:address],
-                    city: params[:city],
-                    state: params[:state],
-                    zipcode: params[:zipcode]})
+    @application = Application.new(application_params)
     if @application.save
         redirect_to "/applications/#{@application.id}"
     else
@@ -21,5 +16,11 @@ class ApplicationsController < ApplicationController
         flash[:alert] = "Error: #{error_message(@application.errors)}"
     end
 
+  end
+
+  private
+
+  def application_params
+    params.permit(:name, :address, :city, :state, :zipcode, :description, :status)
   end
 end
