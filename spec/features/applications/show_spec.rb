@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Application Show' do
-  let!(:application_1) {Application.create!(name: "Gunnar Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog Dad!", status: "in progress")}
-  let!(:application_2) {Application.create!(name: "Priska Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog mom!", status: "in progress")}
-  let!(:application_3) {Application.create!(name: "Lynn Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068", description: "I'm a great dog mom!", status: "in progress")}
+  let!(:application_1) {Application.create!(name: "Gunnar Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068")}
+  let!(:application_2) {Application.create!(name: "Priska Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068")}
+  let!(:application_3) {Application.create!(name: "Lynn Sorensen", address: "123 Fake Street", city: "Red Lodge", state: "MT", zipcode: "59068")}
 
   let!(:shelter_1) {Shelter.create(name: 'Red Lodge Shelter', city: 'Red Lodge, MT', foster_program: false, rank: 9)}
 
@@ -31,8 +31,6 @@ RSpec.describe 'Application Show' do
       expect(page).to have_content(application_1.city)
       expect(page).to have_content(application_1.state)
       expect(page).to have_content(application_1.zipcode)
-      expect(page).to have_content(application_1.description)
-      expect(page).to have_content(application_1.status)
     end
 
     within('#pet-names') do
@@ -78,6 +76,27 @@ RSpec.describe 'Application Show' do
       within('#pet-names') do
         expect(page).to have_content(pet_1.name)
       end
+    end
+    it 'allows an application to be submited only if 1 or more pets have been added' do
+
+      within('#search-pet') do
+        fill_in(:pet_name, with: "Sakic")
+        click_on("Search")
+        click_on("Adopt Me!")
+      end
+
+      save_and_open_page
+      expect(page).to have_content("What makes #{application_2.name} a good fit?")
+
+      within('#conditional-info') do
+        fill_in(:description, with: "Ready as I'll ever be!")
+        click_on("submit")
+        expect(current_path).to eq("/applications/#{application_2.id}")
+        expect(page).to have_content("Pending")
+      end
+
+      expect(page).to_not have_content("Add a Pet to this Application")
+      expect(page).to have_content(pet_1.name)
     end
   end
 end
