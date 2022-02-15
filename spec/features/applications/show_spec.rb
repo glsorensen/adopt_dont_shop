@@ -10,7 +10,7 @@ RSpec.describe 'Application Show' do
   let!(:pet_1) {Pet.create!(name: 'Sakic', breed: 'Groenendael', age: 1, adoptable: true, shelter_id: shelter_1.id)}
   let!(:pet_2) {Pet.create!(name: 'Onyx', breed: 'Standard Poodle', age: 4, adoptable: true, shelter_id: shelter_1.id)}
   let!(:pet_3) {Pet.create!(name: 'Valla', breed: 'Rottweiler', age: 2, adoptable: true, shelter_id: shelter_1.id)}
-  let!(:pet_4) {Pet.create!(name: 'Rusty', breed: 'Chocolate Lab', age: 1, adoptable: true, shelter_id: shelter_1.id)}
+  let!(:pet_4) {Pet.create!(name: 'Vasty', breed: 'Chocolate Lab', age: 1, adoptable: true, shelter_id: shelter_1.id)}
   let!(:pet_5) {Pet.create!(name: 'Nichola', breed: 'Doberman', age: 4, adoptable: true, shelter_id: shelter_1.id)}
 
 
@@ -107,6 +107,18 @@ RSpec.describe 'Application Show' do
       it 'does not allow submissions if no pets have been added' do
 
         expect(page).to_not have_content("What Makes #{application_3.name} a good fit?")
+      end
+
+      it 'allows for partial matches of pet name searches' do
+
+        within('#search-pet') do
+          fill_in(:pet_name, with: "Va")
+          click_on("Search")
+        end
+
+        expect(page).to have_content(pet_3.name)
+        expect(page).to have_content(pet_4.name)
+        expect(page).to_not have_content(pet_5.name)
       end
     end
   end
