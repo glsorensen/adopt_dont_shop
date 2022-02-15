@@ -85,7 +85,6 @@ RSpec.describe 'Application Show' do
         click_on("Adopt Me!")
       end
 
-      save_and_open_page
       expect(page).to have_content("What makes #{application_2.name} a good fit?")
 
       within('#conditional-info') do
@@ -97,6 +96,18 @@ RSpec.describe 'Application Show' do
 
       expect(page).to_not have_content("Add a Pet to this Application")
       expect(page).to have_content(pet_1.name)
+    end
+
+    describe 'database functionality tests' do
+
+      before :each do
+        visit "/applications/#{application_3.id}"
+      end
+
+      it 'does not allow submissions if no pets have been added' do
+
+        expect(page).to_not have_content("What Makes #{application_3.name} a good fit?")
+      end
     end
   end
 end
