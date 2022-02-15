@@ -120,6 +120,18 @@ RSpec.describe 'Application Show' do
         expect(page).to have_content(pet_4.name)
         expect(page).to_not have_content(pet_5.name)
       end
+
+      it 'allows for case insensitive searches' do
+
+        within('#search-pet') do
+          fill_in(:pet_name, with: "va")
+          click_on("Search")
+        end
+
+        expect(page).to have_content(pet_3.name)
+        expect(page).to have_content(pet_4.name)
+        expect(page).to_not have_content(pet_5.name)
+      end
     end
   end
 end
