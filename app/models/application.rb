@@ -1,4 +1,6 @@
 class Application < ApplicationRecord
+  after_initialize :set_defaults
+
   has_many :pet_applications
   has_many :pets, through: :pet_applications
 
@@ -7,10 +9,13 @@ class Application < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates :zipcode, presence: true
-  validates :description, presence: false
 
   def pet_search(pet_name)
       Pet.where("name = ?", pet_name)
   end
-  # enum status: {"in progress": 0, pending: 1, accepted: 2, rejected: 3}
+
+  def set_defaults
+    self.description ||= ""
+    self.status ||= "In Progress"
+  end
 end
