@@ -29,6 +29,9 @@ pet_8 = Pet.create!(name: 'Racer', breed: 'St. Bernard', age: 1, adoptable: true
 
 PetApplication.create!(pet: pet_1, application: application_2)
 PetApplication.create!(pet: pet_2, application: application_2)
-
 PetApplication.create!(pet: pet_3, application: application_3)
 PetApplication.create!(pet: pet_4, application: application_3)
+PetApplication.create!(pet: pet_5, application: application_3)
+PetApplication.create!(pet: pet_6, application: application_1)
+PetApplication.create!(pet: pet_7, application: application_1)
+PetApplication.create!(pet: pet_8, application: application_1)
