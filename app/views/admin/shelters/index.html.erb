@@ -20,7 +20,7 @@
 <br>
 <section id="pending">
 <h1>Shelter's with Pending Applications</h1>
-<% Shelter.has_pending_applications.each do |shelter| %>
-    <%= link_to "#{shelter.name}", "/shelters/#{shelter.id}"%> <br>
+<% Shelter.order_by_number_of_pets.each do |shelter| %>
+    <%= link_to "#{shelter.name}", "/shelters/#{shelter.id}"%> <p>Count: <%= shelter.pet_count %></p> <br>
 <% end %>
 </section>

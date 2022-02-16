@@ -47,9 +47,15 @@ RSpec.describe 'the admin shelters index' do
 
     expect(page).to have_content("Shelter's with Pending Applications")
 
-    expect(page).to have_content(shelter_1.name, count: 4)
-    expect(page).to have_content(shelter_2.name, count: 0)
-    expect(page).to have_content(shelter_3.name, count: 3)
-    expect(page).to have_content(shelter_4.name, count: 1)
+      within('#pending') do
+        expect(page).to have_content(shelter_1.name)
+        expect(page).to have_content(shelter_1.pet_count)
+        expect(page).to have_content(shelter_2.name)
+        expect(page).to have_content(shelter_2.pet_count)
+        expect(page).to have_content(shelter_3.name)
+        expect(page).to have_content(shelter_3.pet_count)
+        expect(page).to have_content(shelter_4.name)
+        expect(page).to have_content(shelter_4.pet_count)
+      end
+    end
   end
-end
