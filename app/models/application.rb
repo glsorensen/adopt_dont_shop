@@ -10,12 +10,12 @@ class Application < ApplicationRecord
   validates :state, presence: true
   validates :zipcode, presence: true
 
-  def pet_search(pet_name)
-      Pet.where("name = ?", pet_name)
-  end
-
   def set_defaults
     self.description ||= ""
     self.status ||= "In Progress"
+  end
+  
+  def pet_search(pet_name)
+    Pet.where("name = ?", pet_name)
   end
 end
