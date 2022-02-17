@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :shelters
   end
 
+  get '/admin/applications/:id', to: 'admin/shelters#show'
+
   get '/pets', to: 'pets#index'
   get '/pets/:id', to: 'pets#show'
   get '/pets/:id/edit', to: 'pets#edit'
